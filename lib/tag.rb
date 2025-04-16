@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+# Tag generator
 module Tag
-  def self.build (name, **attributes)
-    return "<" + name.to_s + ">" if attributes.empty?
+  def self.build(name, **attributes)
+    return "<#{name}>" if attributes.empty?
+
     construct_array = []
-    attributes.each_pair {|key, value| construct_array.push(key.to_s + "=\"" + value + "\"")}
-    result = "<" + name.to_s + " " + construct_array.join(" ") + ">"
-    result
+    attributes.each_pair { |key, value| construct_array.push("#{key}=\"#{value}\"") }
+    "<#{name} #{construct_array.join(" ")}>"
   end
 end
