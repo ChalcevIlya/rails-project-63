@@ -12,6 +12,6 @@ module HexletCode
     temp_hash[:action] = attributes.include?(:url) ? attributes.delete(:url) : "#"
     temp_hash[:method] = "post"
     attributes = temp_hash.merge!(attributes)
-    Tag.build("form", **attributes) {}
+    Tag.build("form", **attributes) { "" }
   end
 end
