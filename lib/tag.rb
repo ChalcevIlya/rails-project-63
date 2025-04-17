@@ -3,10 +3,12 @@
 # Tag generator
 module Tag
   def self.build(name, **attributes)
-    return "<#{name}>" if attributes.empty?
+    return block_given? ? "<#{name}></#{name}>" : "<#{name}>" if attributes.empty?
 
     construct_array = []
     attributes.each_pair { |key, value| construct_array.push("#{key}=\"#{value}\"") }
-    "<#{name} #{construct_array.join(" ")}>"
+    return "<#{name} #{construct_array.join(" ")}>" unless block_given?
+
+    "<#{name} #{construct_array.join(" ")}>#{yield}</#{name}>"
   end
 end
