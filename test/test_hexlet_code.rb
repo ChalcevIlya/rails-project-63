@@ -51,4 +51,30 @@ class TestHexletCode < Minitest::Test
     end) == file.read
     file.close
   end
+
+  def test_submit
+    user_class = Struct.new(:name, :job, keyword_init: true)
+    user = user_class.new job: "hexlet"
+
+    file = File.open("test/form_with_submit.html")
+    assert (HexletCode.form_for user do |f|
+      f.input :name
+      f.input :job
+      f.submit
+    end) == file.read
+    file.close
+  end
+
+  def test_submit_override
+    user_class = Struct.new(:name, :job, keyword_init: true)
+    user = user_class.new job: "hexlet"
+
+    file = File.open("test/form_with_submit_override.html")
+    assert (HexletCode.form_for user do |f|
+      f.input :name
+      f.input :job
+      f.submit "Wow"
+    end) == file.read
+    file.close
+  end
 end
