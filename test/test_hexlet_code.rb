@@ -12,9 +12,13 @@ class TestHexletCode < Minitest::Test
     user_class = Struct.new(:name, :job, keyword_init: true)
     user = user_class.new name: 'rob'
 
-    assert (HexletCode.form_for user, class: 'hexlet-form') == '<form action="#" method="post" class="hexlet-form"></form>'
+    assert (HexletCode.form_for user,
+                                class: 'hexlet-form') ==
+           '<form action="#" method="post" class="hexlet-form"></form>'
     assert (HexletCode.form_for user) == '<form action="#" method="post"></form>'
-    assert (HexletCode.form_for user, url: '/profile', class: 'hexlet-form') == '<form action="/profile" method="post" class="hexlet-form"></form>'
+    assert (HexletCode.form_for user, url: '/profile',
+                                      class: 'hexlet-form') ==
+           '<form action="/profile" method="post" class="hexlet-form"></form>'
   end
 
   def test_generating_full_form_without_additional_attrs

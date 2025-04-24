@@ -8,7 +8,8 @@ module HexletCode
 
   def self.form_for(structure, **attributes)
     @result = ''
-    attributes = { action: attributes.include?(:url) ? attributes.delete(:url) : '#', method: 'post' }.merge!(attributes)
+    attributes = { action: attributes.include?(:url) ? attributes.delete(:url) : '#',
+                   method: 'post' }.merge!(attributes)
     @result += Tag.build('form', **attributes)
     if block_given?
       @structure = structure

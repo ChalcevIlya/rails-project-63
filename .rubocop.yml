@@ -6,10 +6,10 @@ Style/StringLiterals:
   EnforcedStyle: single_quotes
 
 Style/StringLiteralsInInterpolation:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
 
 Metrics/MethodLength:
   Max: 20
 
 Layout/LineLength:
-  Max: 200
+  Max: 120

@@ -7,8 +7,8 @@ module Tag
 
     construct_array = []
     attributes.each_pair { |key, value| construct_array.push("#{key}=\"#{value}\"") }
-    return "<#{name} #{construct_array.join(" ")}>" unless block_given?
+    return "<#{name} #{construct_array.join(' ')}>" unless block_given?
 
-    "<#{name} #{construct_array.join(" ")}>#{yield}</#{name}>"
+    "<#{name} #{construct_array.join(' ')}>#{yield}</#{name}>"
   end
 end
