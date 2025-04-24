@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "hexlet_code/version"
-autoload(:Tag, "lib/tag.rb")
+autoload(:Tag, "tag.rb")
 # Main module
 module HexletCode
   class Error < StandardError; end
