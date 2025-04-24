@@ -5,7 +5,7 @@ require_relative "hexlet_code/version"
 # Main module
 module HexletCode
   class Error < StandardError; end
-  autoload(:Tag, "/home/broccolya/Projects/rails-project-63/lib/tag.rb")
+  autoload(:Tag, "lib/tag.rb")
 
   def self.form_for(structure, **attributes)
     @result = ""
