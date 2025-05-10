@@ -5,4 +5,4 @@ lint:
 	bundle exec rubocop
 
 test:
-	bundle exec rake test
+	rake test

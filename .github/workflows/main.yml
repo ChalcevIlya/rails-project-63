@@ -32,4 +32,4 @@ jobs:
         run: make lint
 
       - name: Run tests
-        run: rake test
+        run: make test
