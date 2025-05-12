@@ -1,26 +1,32 @@
 # frozen_string_literal: true
 
-autoload(:Tag, 'tag.rb')
+module HexletCode
+  # FormBuilder - для создания стейта формы
+  class FormBuilder
+    attr_accessor :form_state
+    attr_reader :record
 
-# Field generator
-module FormBuilder
-  def self.input(field, **attributes)
-    temp_hash = {}
-    field_name = field.to_s
-    temp_hash[:name] = field_name
-    value = @structure.public_send(field)
-    @result += Tag.build('label', for: field_name) { field_name.capitalize }
-    case attributes.delete(:as)
-    when :text
-      temp_hash.merge!({ cols: attributes.include?(:cols) ? attributes.delete(:cols) : '20',
-                         rows: attributes.include?(:rows) ? attributes.delete(:rows) : '40' })
-      @result += Tag.build('textarea', **temp_hash, **attributes) { value }
-    else
-      @result += Tag.build('input', **temp_hash, type: 'text', value: value, **attributes)
+    def initialize(record, **attributes)
+      @record = record
+      @form_state = [{ tag_name: 'form', action: attributes.fetch(:url, '#'),
+                       method: 'post' }.merge(attributes.except(:url))]
     end
-  end
 
-  def self.submit(button_text = 'Save')
-    @result += Tag.build('input', type: 'submit', value: button_text)
+    def input(field, **attributes)
+      field_name = field.to_s
+      value = record.public_send(field)
+
+      case attributes.delete(:as)
+      when :text
+        @form_state.push({ tag_name: 'textarea', inside_value: value, name: field_name, cols: 20,
+                           rows: 40 }.merge(attributes))
+      else
+        @form_state.push({ tag_name: 'input', name: field_name, type: 'text', value: value }.merge(attributes))
+      end
+    end
+
+    def submit(button_text = 'Save', **attributes)
+      @form_state.push({ tag_name: 'input', type: 'submit', value: button_text }.merge(attributes))
+    end
   end
 end
