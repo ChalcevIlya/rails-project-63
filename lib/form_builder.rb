@@ -1,20 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'hexlet_code/version'
 autoload(:Tag, 'tag.rb')
-# Main module
-module HexletCode
-  def self.form_for(structure, **attributes)
-    @result = ''
-    form_options = { action: attributes.fetch(:url, '#'), method: 'post' }.merge(attributes.except(:url))
-    @result += Tag.build('form', **form_options)
-    if block_given?
-      @structure = structure
-      yield(self)
-    end
-    "#{@result}</form>"
-  end
 
+# Field generator
+module FormBuilder
   def self.input(field, **attributes)
     temp_hash = {}
     field_name = field.to_s

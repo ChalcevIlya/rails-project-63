@@ -2,13 +2,13 @@
 
 # Tag generator
 module Tag
+  NO_PAIR_TAGS = %w[area base basefont bgsound br col command embed hr img input
+                    isindex keygen link meta param source track wbr form].freeze
+
   def self.build(name, **attributes)
-    return block_given? ? "<#{name}></#{name}>" : "<#{name}>" if attributes.empty?
+    attributes_line = attributes.map { |key, value| " #{key}=\"#{value}\"" }.join
+    return "<#{name}#{attributes_line}>" if NO_PAIR_TAGS.include?(name)
 
-    construct_array = []
-    attributes.each_pair { |key, value| construct_array.push("#{key}=\"#{value}\"") }
-    return "<#{name} #{construct_array.join(' ')}>" unless block_given?
-
-    "<#{name} #{construct_array.join(' ')}>#{yield}</#{name}>"
+    "<#{name}#{attributes_line}>#{yield}</#{name}>"
   end
 end
