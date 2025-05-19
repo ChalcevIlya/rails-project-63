@@ -5,7 +5,7 @@ module HexletCode
     # SubmitInput - класс для рендера submit инпута
     class SubmitInput < BaseInput
       def render
-        "#{tag_render}#{Tag.build('input', type: 'submit', value: input_hash[:value], **input_hash[:attributes])}"
+        Tag.build('input', type: 'submit', value: input_hash[:value], **input_hash[:attributes])
       end
     end
   end

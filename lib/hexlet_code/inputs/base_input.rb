@@ -9,11 +9,12 @@ module HexletCode
 
       def initialize(input_hash)
         @input_hash = input_hash
-        @tag_render = ''
       end
 
-      def render
-        @tag_render += Tag.build('label', for: input_hash[:name]) do
+      private
+
+      def label
+        Tag.build('label', for: input_hash[:name]) do
           input_hash[:name]&.capitalize
         end
       end
