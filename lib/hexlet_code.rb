@@ -13,4 +13,4 @@ module HexletCode
     yield builder if block_given?
     FormTemplate.render(builder)
   end
-end
+end 
